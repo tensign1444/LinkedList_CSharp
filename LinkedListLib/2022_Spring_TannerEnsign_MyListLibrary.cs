@@ -30,6 +30,12 @@ namespace LinkedListLib
                 next = null;
             }
 
+            public Node()
+            {
+                data = default;
+                next = null;
+            }
+
         }
 
 
@@ -95,7 +101,7 @@ namespace LinkedListLib
         /// Contains, this method checks to see if the item the user is looking for
         /// is in the list.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item"> The item to check for </param>
         /// <returns></returns>
         public bool Contains(T item)
         {
@@ -106,6 +112,55 @@ namespace LinkedListLib
         }
 
 
+
+        /// <summary>
+        /// Insert, inserts a specific item at a specific index
+        /// </summary>
+        /// <param name="idx"> The index to be inserted at </param>
+        /// <param name="item"> The item being inserted </param>
+        public void Insert(int idx, T item)
+        {
+            Node<T> temp = new Node<T>(item);
+            Node<T> curr = head;
+
+            for(int i = 0; i < idx; i++)
+            {
+                curr = curr.next;
+            }
+            temp.next = curr.next;
+            curr.next = temp;
+            Count++;
+        }
+
+        /// <summary>
+        /// RemoveAt, removes the item at an specific index
+        /// </summary>
+        /// <param name="idx"> The index to remove </param>
+        public void RemoveAt(int idx)
+        {           
+            Node<T> curr = head;
+
+            for (int i = 0; i < idx; i++)
+            {
+                curr = curr.next;
+            }
+            Node<T> temp = curr.next;
+            curr.next = temp.next;
+            Count--;
+            
+        }
+
+
+        /// <summary>
+        /// Clear, clears the whole linked list making it empty
+        /// </summary>
+        public void Clear()
+        {
+            Node<T> temp = new Node<T>();
+            head = temp;
+            tail = temp;
+            Count = 0;
+        }
 
 
         /// <summary>
