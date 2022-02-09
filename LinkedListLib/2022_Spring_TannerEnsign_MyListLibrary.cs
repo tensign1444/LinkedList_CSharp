@@ -156,10 +156,76 @@ namespace LinkedListLib
         /// </summary>
         public void Clear()
         {
-            Node<T> temp = new Node<T>();
-            head = temp;
-            tail = temp;
-            Count = 0;
+            head = tail = null; Count = 0;
+        }
+
+        /// <summary>
+        /// ToArray, converts the linked list to an array of type T
+        /// </summary>
+        /// <returns>returns the linked list as an array</returns>
+        public T[] ToArray()
+        {
+            T[] arr = new T[Count];
+            Node<T> curr = head;
+
+            for (int i = 0; i < Count; i++)
+            {
+                arr[i] = curr.data;
+                curr = curr.next;
+            }
+
+            return arr;
+        }
+
+        /// <summary>
+        /// ToString, converts the linked list to a string to print out
+        /// </summary>
+        /// <returns>returns the linked list as a string</returns>
+        public override string ToString()
+        {
+            if (Count == 0)
+                return "The list is empty";
+            string returnVal = null;
+
+            Node<T> curr = head;
+            for (int i = 0; i < Count; i++)
+            {
+                if (i >= Count - 1)
+                    returnVal = returnVal + curr.data;
+                else
+                    returnVal = returnVal + curr.data + ", ";
+                curr = curr.next;
+            }
+
+            return returnVal;
+        }
+
+        /// <summary>
+        /// this, The getter and setter for an index
+        /// </summary>
+        /// <param name="idx">the index to get or set</param>
+        /// <returns>the item getting, if getting</returns>
+        public T this[int idx]
+        {
+
+            get
+            {
+                Node<T> curr = head;
+                for (int i = 0; i < idx - 1; i++)
+                {
+                    curr = curr.next;
+                }
+                return curr.data;
+            }
+            set
+            {
+                Node<T> curr = head;
+                for (int i = 0; i < idx - 1; i++)
+                {
+                    curr = curr.next;
+                }
+                curr.data = value;
+            }
         }
 
 
