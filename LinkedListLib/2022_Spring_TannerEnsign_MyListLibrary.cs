@@ -123,7 +123,7 @@ namespace LinkedListLib
             Node<T> temp = new Node<T>(item);
             Node<T> curr = head;
 
-            for(int i = 0; i < idx; i++)
+            for(int i = 0; i < idx - 1; i++)
             {
                 curr = curr.next;
             }
@@ -140,7 +140,7 @@ namespace LinkedListLib
         {           
             Node<T> curr = head;
 
-            for (int i = 0; i < idx; i++)
+            for (int i = 0; i < idx - 1; i++)
             {
                 curr = curr.next;
             }

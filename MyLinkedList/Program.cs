@@ -9,7 +9,7 @@ namespace MyLinkedList
         static void Main(string[] args)
         {
             LameTest();
-            Console.ForegroundColor = ConsoleColor.Red;
+        /**    Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Completeing second test......");
             TestOne();
             Console.ForegroundColor = ConsoleColor.Red;
@@ -19,7 +19,7 @@ namespace MyLinkedList
             Console.WriteLine("Completeing fourth test....");
             Console.WriteLine("**WARNING : THIS IS A BIG TEST**....");
             Thread.Sleep(3000);
-            BigTest();
+            BigTest(); **/
         }
 
         static void TestOne()
@@ -85,8 +85,33 @@ namespace MyLinkedList
             list.Add("whatsup");
             list.Add("How");
             list.IndexOf("How");
-            Console.WriteLine(list.IndexOf("How")
-            );
+
+            foreach (string str in list)
+                Console.WriteLine($":{str}");
+
+            Console.WriteLine("Removing.......");
+
+            list.RemoveAt(1);
+
+            foreach (string str in list)
+                Console.WriteLine($":{str}");
+
+
+            Console.WriteLine("Inserting......");
+
+            list.Insert(1, "whatsup");
+
+            foreach (string str in list)
+                Console.WriteLine($":{str}");
+
+
+            Console.WriteLine("Clearing......");
+
+            list.Clear();
+
+
+            foreach (string str in list)
+                Console.WriteLine($":{str}");
 
         }
     }
