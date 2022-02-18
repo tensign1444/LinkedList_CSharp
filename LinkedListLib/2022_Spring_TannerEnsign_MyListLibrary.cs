@@ -8,18 +8,18 @@ namespace LinkedListLib
     /// Linked list library Class
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class _2022_Spring_TannerEnsign_MyListLibrary<T> : IEnumerable<T>
+    public class _2022_Spring_TannerEnsign_MyListLibrary<T> : IEnumerable<T> where T : IComparable<T>
     {
 
         /// <summary>
         /// Internal class called Node
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        internal class Node<T>
+        internal class Node
         {
             public T data; //data of the node
 
-            public Node<T> next; //the next node
+            public Node next; //the next node
 
             /// <summary>
             /// Constructor for node class
@@ -36,11 +36,20 @@ namespace LinkedListLib
                 next = null;
             }
 
+            int CompareTo(Object obj)
+            {
+                Node lhs = this;
+                Node rhs = obj as Node;
+
+                int type = lhs.data.CompareTo(rhs.data);
+                return type;
+             }
+
         }
 
 
-        private Node<T> head; //our head node(the front node)
-        private Node<T> tail; //our tail node(the end node)
+        private Node head; //our head node(the front node)
+        private Node tail; //our tail node(the end node)
 
         /// <summary>
         /// Constructor for library
@@ -58,7 +67,7 @@ namespace LinkedListLib
         /// <param name="item"></param>
         public void Add(T item)
         {
-            Node<T> temp = new Node<T>(item);
+            Node temp = new Node(item);
             if(Count > 0)
             {
                 tail.next = temp;
@@ -85,7 +94,7 @@ namespace LinkedListLib
         public int IndexOf(T item)
         {
             int idx = 0;
-            Node<T> temp = head;
+            Node temp = head;
             while(temp != null)
             {
                 if (temp.data.Equals(item))
@@ -120,8 +129,8 @@ namespace LinkedListLib
         /// <param name="item"> The item being inserted </param>
         public void Insert(int idx, T item)
         {
-            Node<T> temp = new Node<T>(item);
-            Node<T> curr = head;
+            Node temp = new Node(item);
+            Node curr = head;
 
             for(int i = 0; i < idx - 1; i++)
             {
@@ -138,13 +147,13 @@ namespace LinkedListLib
         /// <param name="idx"> The index to remove </param>
         public void RemoveAt(int idx)
         {           
-            Node<T> curr = head;
+            Node curr = head;
 
             for (int i = 0; i < idx - 1; i++)
             {
                 curr = curr.next;
             }
-            Node<T> temp = curr.next;
+            Node temp = curr.next;
             curr.next = temp.next;
             Count--;
             
@@ -166,7 +175,7 @@ namespace LinkedListLib
         public T[] ToArray()
         {
             T[] arr = new T[Count];
-            Node<T> curr = head;
+            Node curr = head;
 
             for (int i = 0; i < Count; i++)
             {
@@ -187,7 +196,7 @@ namespace LinkedListLib
                 return "The list is empty";
             string returnVal = null;
 
-            Node<T> curr = head;
+            Node curr = head;
             for (int i = 0; i < Count; i++)
             {
                 if (i >= Count - 1)
@@ -210,7 +219,7 @@ namespace LinkedListLib
 
             get
             {
-                Node<T> curr = head;
+                Node curr = head;
                 for (int i = 0; i < idx - 1; i++)
                 {
                     curr = curr.next;
@@ -219,13 +228,45 @@ namespace LinkedListLib
             }
             set
             {
-                Node<T> curr = head;
+                Node curr = head;
                 for (int i = 0; i < idx - 1; i++)
                 {
                     curr = curr.next;
                 }
                 curr.data = value;
             }
+        }
+
+        /// <summary>
+        /// This method sorts the array by insertion sorting when called.
+        /// </summary>
+        public void insertionSort()
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                T itemData = WalkToNode(i).data;
+                int j;
+                for (j = i - 1; j >= 0 && WalkToNode(j).data.CompareTo(itemData) > 0; j--)
+                {
+                    WalkToNode(j + 1).data = WalkToNode(j).data;
+                }
+                WalkToNode(j + 1).data = itemData;
+            }
+        }
+
+        // <summary>
+        /// WalkToNode, private helper method to walk to specific index of the linked list
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>return the linked list</returns>
+        private Node WalkToNode(int index)
+        {
+            if (index < 0 || index > Count)
+                throw new IndexOutOfRangeException("Index out of range");
+            Node curr = head;
+            for (int i = 0; i < index; i++)
+                curr = curr.next;
+            return curr;
         }
 
 
@@ -244,13 +285,15 @@ namespace LinkedListLib
         /// <returns>The data of our item</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            Node<T> temp = head;
+            Node temp = head;
             while (temp != null)
             {
                 yield return temp.data;
                 temp = temp.next;
             }
         }
+
+
 
     }
 }

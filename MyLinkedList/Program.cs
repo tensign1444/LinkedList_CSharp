@@ -8,7 +8,7 @@ namespace MyLinkedList
     {
         static void Main(string[] args)
         {
-            LameTest();
+            /**LameTest();
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Completeing second test...");
@@ -26,7 +26,55 @@ namespace MyLinkedList
             Thread.Sleep(3000);
 
 
-            BigTest();
+            BigTest(); **/
+
+
+            intSortingTest();
+            stringTest();
+
+
+        }
+
+
+        /// <summary>
+        /// Calls insertionSort on a linked list of integers
+        /// </summary>
+        static void intSortingTest()
+        {
+            _2022_Spring_TannerEnsign_MyListLibrary<int> arr = new _2022_Spring_TannerEnsign_MyListLibrary<int>();
+
+              Random rand = new Random();
+
+              for (int i = 0; i < 10; i++)
+             {
+                 arr.Add(rand.Next(100));
+             }
+
+            Console.WriteLine(arr.ToString());
+
+            arr.insertionSort();
+
+            Console.WriteLine(arr.ToString());
+
+        }
+
+        /// <summary>
+        /// Calls insertionSort on a linked list of strings
+        /// </summary>
+        static void stringTest()
+        {
+            _2022_Spring_TannerEnsign_MyListLibrary<string> arr = new _2022_Spring_TannerEnsign_MyListLibrary<string>();
+
+
+            arr.Add("hello");
+            arr.Add("Tanner");
+            arr.Add("A");
+
+            Console.WriteLine(arr.ToString());
+
+            arr.insertionSort();
+
+            Console.WriteLine(arr.ToString());
         }
 
         /// <summary>
