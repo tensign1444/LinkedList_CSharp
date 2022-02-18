@@ -240,7 +240,7 @@ namespace LinkedListLib
         /// <summary>
         /// This method sorts the array by insertion sorting when called.
         /// </summary>
-        public void insertionSort()
+        public void SimpleSort()
         {
             for (int i = 0; i < Count; i++)
             {
