@@ -82,16 +82,14 @@ namespace LinkedListLib
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int IndexOf(T item)
+        public int IndexOf(T item, int startIdx = 0)
         {
-            int idx = 0;
             Node<T> temp = head;
-            while(temp != null)
+            for (int i = startIdx; i < Count; i++)
             {
                 if (temp.data.Equals(item))
-                    return idx;
+                    return i;
                 temp = temp.next;
-                idx++;
             }
             return -1;
         }
@@ -123,7 +121,7 @@ namespace LinkedListLib
             Node<T> temp = new Node<T>(item);
             Node<T> curr = head;
 
-            for(int i = 0; i < idx - 1; i++)
+            for(int i = 0; i < idx; i++)
             {
                 curr = curr.next;
             }
@@ -201,6 +199,22 @@ namespace LinkedListLib
         }
 
         /// <summary>
+        /// WalkToNode, private helper method to walk to specific index of the linked list
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>return the linked list</returns>
+        private Node<T> WalkToNode(int index)
+        {
+            if (index < 0 || index > Count)
+                throw new IndexOutOfRangeException("Index out of range");
+            Node<T> curr = head;
+            for (int i = 0; i < index; i++)
+                curr = curr.next;
+            return curr;
+        }
+
+
+        /// <summary>
         /// this, The getter and setter for an index
         /// </summary>
         /// <param name="idx">the index to get or set</param>
@@ -210,21 +224,11 @@ namespace LinkedListLib
 
             get
             {
-                Node<T> curr = head;
-                for (int i = 0; i < idx - 1; i++)
-                {
-                    curr = curr.next;
-                }
-                return curr.data;
+                return WalkToNode(idx).data;
             }
             set
             {
-                Node<T> curr = head;
-                for (int i = 0; i < idx - 1; i++)
-                {
-                    curr = curr.next;
-                }
-                curr.data = value;
+                WalkToNode(idx).data = value;
             }
         }
 

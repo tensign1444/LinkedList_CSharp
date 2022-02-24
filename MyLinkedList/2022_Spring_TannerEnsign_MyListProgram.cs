@@ -26,7 +26,7 @@ namespace MyLinkedList
             Thread.Sleep(3000);
 
 
-            BigTest();
+          //  BigTest();
         }
 
         /// <summary>
@@ -64,13 +64,26 @@ namespace MyLinkedList
             for (int i = 0; i < 100; i++)
                 list.Add(i.ToString());
 
-            int numbeChosen = rand.Next(200);
+            int numbeChosen = rand.Next(105);
 
             Console.WriteLine($"I chose number {numbeChosen}, it is at the index {list.IndexOf(numbeChosen.ToString()).ToString()}");
 
             numbeChosen = rand.Next(100);
 
             Console.WriteLine($"I chose number {numbeChosen}, is it in the list? {list.Contains(numbeChosen.ToString()).ToString()}");
+
+            Console.WriteLine(list.ToString());
+
+            Console.WriteLine($"I chose number {numbeChosen}, I will remove it.");
+
+            list.RemoveAt(list.IndexOf(numbeChosen.ToString()));
+
+            Console.WriteLine(list.ToString());
+
+            list[1] = "Hello";
+
+            Console.WriteLine(list.ToString());
+
 
         }
 
