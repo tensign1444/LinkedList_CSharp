@@ -94,11 +94,11 @@ namespace LinkedListLib
         public int IndexOf(T item, int startIdx = 0)
         {
             int idx = 0;
-            Node<T> temp = head;
+            Node temp = head;
             while(temp != null)
             {
                 if (temp.data.Equals(item))
-                    return i;
+                    return idx;
                 temp = temp.next;
             }
             return -1;
@@ -213,11 +213,11 @@ namespace LinkedListLib
         /// </summary>
         /// <param name="index"></param>
         /// <returns>return the linked list</returns>
-        private Node<T> WalkToNode(int index)
+        private Node WalkToNode(int index)
         {
             if (index < 0 || index > Count)
                 throw new IndexOutOfRangeException("Index out of range");
-            Node<T> curr = head;
+            Node curr = head;
             for (int i = 0; i < index; i++)
                 curr = curr.next;
             return curr;
@@ -234,7 +234,7 @@ namespace LinkedListLib
 
             get
             {
-                Node<T> curr = head;
+                Node curr = head;
                 for (int i = 0; i < idx - 1; i++)
                 {
                     curr = curr.next;
@@ -243,7 +243,7 @@ namespace LinkedListLib
             }
             set
             {
-                Node<T> curr = head;
+                Node curr = head;
                 for (int i = 0; i < idx - 1; i++)
                 {
                     curr = curr.next;
@@ -269,20 +269,7 @@ namespace LinkedListLib
             }
         }
 
-        // <summary>
-        /// WalkToNode, private helper method to walk to specific index of the linked list
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns>return the linked list</returns>
-        private Node WalkToNode(int index)
-        {
-            if (index < 0 || index > Count)
-                throw new IndexOutOfRangeException("Index out of range");
-            Node curr = head;
-            for (int i = 0; i < index; i++)
-                curr = curr.next;
-            return curr;
-        }
+
 
 
         /// <summary>

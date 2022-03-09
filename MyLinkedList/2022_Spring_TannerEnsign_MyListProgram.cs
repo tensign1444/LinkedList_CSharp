@@ -8,7 +8,7 @@ namespace MyLinkedList
     {
         static void Main(string[] args)
         {
-            /**LameTest();
+          /**  LameTest();
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Completeing second test...");
@@ -29,8 +29,8 @@ namespace MyLinkedList
             BigTest(); **/
 
 
-            intSortingTest();
-            stringTest();
+           intSortingTest();
+           stringTest();
 
 
         }
@@ -128,11 +128,15 @@ namespace MyLinkedList
 
             Console.WriteLine(list.ToString());
 
-            list[1] = "Hello";
+
+            Console.WriteLine($"I chose number {numbeChosen}, I will insert it at index 80.");
+
+            list.Insert(80, numbeChosen.ToString());
+
 
             Console.WriteLine(list.ToString());
 
-
+            Console.WriteLine(list.Count);
         }
 
         static void BigTest()
@@ -163,6 +167,7 @@ namespace MyLinkedList
 
                 Console.WriteLine($"I chose number {numbeChosen}, is it in the list? {list.Contains(numbeChosen.ToString()).ToString()}");
 
+                int indx = rand.Next(max);
 
                 if (list.Contains(numbeChosen.ToString()))
                 {
@@ -171,8 +176,8 @@ namespace MyLinkedList
                 }
                 else
                 {
-                    Console.WriteLine($"I will now add the item at {numbeChosen} and it will be the number {numbeChosen}");
-                    list.Insert(numbeChosen, numbeChosen.ToString());
+                    Console.WriteLine($"I will now add the item at {indx} and it will be the number {numbeChosen}");
+                    list.Insert(indx, numbeChosen.ToString());
                 }
 
                 foreach (string str in list)
