@@ -301,50 +301,56 @@ namespace LinkedListLib
 
         //Merge Sort in progress
 
-        private Node sortedMerge(Node leftCursor, Node rightCursor)
+        private Node Sort(Node leftCursor, Node rightCursor)
         {
             Node temp;
 
             if (leftCursor == null)
-                return leftCursor;
-            if (rightCursor == null)
                 return rightCursor;
+            if (rightCursor == null)
+                return leftCursor;
 
-            if (rightCursor.data.CompareTo(leftCursor.data) < 0 || rightCursor.data.CompareTo(leftCursor.data) == 0)
+            if (leftCursor.data.CompareTo(rightCursor.data) < 0)
             {
                 temp = leftCursor;
-                temp.next = sortedMerge(leftCursor.next, rightCursor);
+                temp.next = Sort(leftCursor.next, rightCursor);
+                tail = temp.next;
             }
             else
             {
                 temp = rightCursor;
-                temp.next = sortedMerge(leftCursor, rightCursor.next);
+                temp.next = Sort(leftCursor, rightCursor.next);
+                tail = temp.next;
             }
             return temp;
         }
 
         public void MergeSort()
         {
-            mergeSortDriver(head);
+            MergeSort(head);
         }
 
-        private Node mergeSortDriver(Node start)
+
+        private Node MergeSort(Node start)
         {
             if (start == null || start.next == null)
                 return start;
 
-            Node mid = findMid(start) ;
-            Node split = mid.next;
+            Node endOf1st = findMid(start);
+            Node begOf2nd = endOf1st.next;
+            endOf1st.next = null;
 
-            mid.next = null;
+            Node LHS = start;
+            Node RHS = begOf2nd;
 
-            Node leftCursor = mergeSortDriver(start);
+           LHS = MergeSort(LHS);
+           RHS = MergeSort(RHS);
 
-            Node rightCursor = mergeSortDriver(split);
+           Node sorted = Sort(LHS, RHS);
 
-            Node sorted = sortedMerge(leftCursor, rightCursor);
+           head = sorted;
 
-            return sorted;
+           return sorted;
         }
 
         private Node findMid(Node start)
@@ -353,10 +359,16 @@ namespace LinkedListLib
             Node fastTemp = start.next;
             Node slowTemp = start;
 
-            while(fastTemp != null && fastTemp.next != null)
+            while (fastTemp != null)
             {
-                fastTemp = fastTemp.next.next;
-                slowTemp = slowTemp.next;
+                fastTemp = fastTemp.next;
+
+                if (fastTemp != null)
+                {
+                    fastTemp = fastTemp.next;
+                    slowTemp = slowTemp.next;
+                }
+                
             }
 
             return slowTemp;

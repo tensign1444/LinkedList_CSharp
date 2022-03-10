@@ -45,10 +45,11 @@ namespace MyLinkedList
 
               Random rand = new Random();
 
-              for (int i = 0; i < 10; i++)
+             for (int i = 0; i < 10; i++)
              {
                  arr.Add(rand.Next(100));
-             }
+             } 
+
 
             Console.WriteLine(arr.ToString());
 
