@@ -297,5 +297,153 @@ namespace LinkedListLib
 
 
 
+
+
+        //Merge Sort in progress
+
+        private Node sortedMerge(Node leftCursor, Node rightCursor)
+        {
+            Node temp;
+
+            if (leftCursor == null)
+                return leftCursor;
+            if (rightCursor == null)
+                return rightCursor;
+
+            if (rightCursor.data.CompareTo(leftCursor.data) < 0 || rightCursor.data.CompareTo(leftCursor.data) == 0)
+            {
+                temp = leftCursor;
+                temp.next = sortedMerge(leftCursor.next, rightCursor);
+            }
+            else
+            {
+                temp = rightCursor;
+                temp.next = sortedMerge(leftCursor, rightCursor.next);
+            }
+            return temp;
+        }
+
+        public void MergeSort()
+        {
+            mergeSortDriver(head);
+        }
+
+        private Node mergeSortDriver(Node start)
+        {
+            if (start == null || start.next == null)
+                return start;
+
+            Node mid = findMid(start) ;
+            Node split = mid.next;
+
+            mid.next = null;
+
+            Node leftCursor = mergeSortDriver(start);
+
+            Node rightCursor = mergeSortDriver(split);
+
+            Node sorted = sortedMerge(leftCursor, rightCursor);
+
+            return sorted;
+        }
+
+        private Node findMid(Node start)
+        {
+
+            Node fastTemp = start.next;
+            Node slowTemp = start;
+
+            while(fastTemp != null && fastTemp.next != null)
+            {
+                fastTemp = fastTemp.next.next;
+                slowTemp = slowTemp.next;
+            }
+
+            return slowTemp;
+        }
+
+
+     /**   private void mergeSortRecursion( int left, int right)
+        {
+
+                int mid = (left + right) / 2;
+                mergeSortRecursion(left, mid);
+                mergeSortRecursion( mid + 1, right);
+                merge(left, mid, right);
+
+        }
+
+
+        private void merge(int start, int mid, int end)
+        {
+            int leftCursor = start;
+            int rightCursor = mid + 1;
+
+            int i = start;
+            while (leftCursor <= mid && rightCursor <= end)
+            {
+                if (list.get(leftCursor).compareTo(list.get(rightCursor)) < 0)
+                {
+                    temp.set(i, list.get(leftCursor));
+                    leftCursor++;
+                    i++;
+                }
+
+                else
+                {
+                    temp.set(i, list.get(rightCursor));
+                    rightCursor++;
+                    i++;
+                }
+
+            }
+            elementsRemainInLeftSubList( leftCursor, rightCursor, mid, end, i);
+
+            elementsRemainInRightSubList(rightCursor, mid, end, i);
+
+            copyElementsBack(start, end);
+
+        }
+
+
+        private void copyElementsBack(int start, int end)
+        {
+            for (int counter = start; counter <= end; counter++)
+            {
+                WalkToNode(counter).data = WalkToNode(counter).data;
+
+            }
+        }
+
+
+        private void elementsRemainInLeftSubList( int leftCursor, int rightCursor, int mid, int end, int count)
+        {
+            if (leftCursor <= mid)
+            {
+                for (int counter = count; counter <= end; counter++)
+                {
+                    WalkToNode(counter).data = WalkToNode(leftCursor).data;
+                    leftCursor++;
+                }
+            }
+        }
+
+
+        private void elementsRemainInRightSubList(int rightCursor, int mid, int end, int count)
+        {
+            if (rightCursor <= end)
+            {
+                for (int counter = rightCursor; counter <= end; counter++)
+                {
+                    WalkToNode(counter).data = WalkToNode(rightCursor).data;
+                    rightCursor++;
+
+                }
+            }
+        } **/
+
+
+
+
     }
 }

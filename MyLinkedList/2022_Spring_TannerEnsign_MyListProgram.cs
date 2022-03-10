@@ -52,7 +52,7 @@ namespace MyLinkedList
 
             Console.WriteLine(arr.ToString());
 
-            arr.SimpleSort();
+            arr.MergeSort();
 
             Console.WriteLine(arr.ToString());
 
@@ -72,7 +72,7 @@ namespace MyLinkedList
 
             Console.WriteLine(arr.ToString());
 
-            arr.SimpleSort();
+            arr.MergeSort();
 
             Console.WriteLine(arr.ToString());
         }
